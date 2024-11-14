@@ -15,7 +15,8 @@ public record ResponseDto<T> (
         boolean success,
         @Nullable T data,
         @Nullable ExceptionDto error
-) {
+)
+{
     public static <T> ResponseDto<T> ok(T data){
         return new ResponseDto<>(
                 HttpStatus.OK,
