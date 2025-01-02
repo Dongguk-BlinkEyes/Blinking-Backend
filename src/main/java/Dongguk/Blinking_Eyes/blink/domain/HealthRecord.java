@@ -22,7 +22,7 @@ public class HealthRecord {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private User userId;
+    private User user;
 
     @Column(name = "record_month")
     private LocalDate recordMonth;

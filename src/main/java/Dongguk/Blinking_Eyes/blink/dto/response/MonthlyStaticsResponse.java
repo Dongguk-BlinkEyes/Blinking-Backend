@@ -8,6 +8,6 @@ import java.util.List;
 
 @Builder
 public record MonthlyStaticsResponse (
-        String month,
+        int month,
         List<DayCount> list
 ){}
