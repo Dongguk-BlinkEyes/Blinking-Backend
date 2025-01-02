@@ -14,6 +14,6 @@ public interface DayCountRepository extends JpaRepository<DayCount, Long> {
     List<DayCount> findAllByDayCountDate(LocalDate currentDate);
 
     @Query("SELECT d FROM DayCount d WHERE FUNCTION('MONTH', d.startTime) = :month AND FUNCTION('YEAR', d.startTime) = :year")
-    List<DayCount> findAllByMonthAndYear(@Param("month") int month, @Param("year") int year);
+    List<DayCount> findAllByMonthAndYear(@Param("year") int year, @Param("month") int month);
 
 }

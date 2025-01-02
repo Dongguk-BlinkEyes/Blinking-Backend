@@ -34,10 +34,6 @@ public class BlinkService {
             LocalDateTime start = dayCount.getStartTime();
             LocalDateTime end = dayCount.getEndTime();
 
-            if (start == null || end == null) {
-                throw new IllegalArgumentException("xxx");
-            }
-
             Duration duration = Duration.between(start, end);
             totalDuration = totalDuration.plus(duration);
 
@@ -56,7 +52,18 @@ public class BlinkService {
     }
 
     @Transactional(readOnly = true)
-    public MonthlyStaticsResponse getMonthlyStatics(Long userId){
-        //구현해야함
+    public MonthlyStaticsResponse getMonthlyStatics(Long userId, LocalDate date) {
+        int year = date.getYear();
+        int month = date.getMonthValue();
+
+        List<DayCount> list = dayCountRepository.findAllByMonthAndYear(year, month);
+        list.sort((s1,s2)-> s1.getStartTime().compareTo(s2.getStartTime()));
+
+        MonthlyStaticsResponse monthlyStaticsResponse = MonthlyStaticsResponse.builder()
+                .month(month)
+                .list(list)
+                .build();
+
+        return monthlyStaticsResponse;
     }
 }
